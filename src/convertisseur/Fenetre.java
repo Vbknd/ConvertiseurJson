@@ -47,6 +47,24 @@ public class Fenetre extends JPanel {
             }
         });
 
+        // Nouveau bouton carré pour ouvrir l'explorateur sur le dossier du fichier d'entrée
+        JButton openInputFolderButton = new JButton("Ouvrir");
+        openInputFolderButton.setPreferredSize(new Dimension(26, 26));
+        gbc.gridx = 3;
+        add(openInputFolderButton, gbc);
+        openInputFolderButton.addActionListener(e -> {
+            String path = inputFilePathField.getText().trim();
+            if (!path.isEmpty()) {
+                File file = new File(path);
+                File directory = file.isDirectory() ? file : file.getParentFile();
+                try {
+                    Desktop.getDesktop().open(directory);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(Fenetre.this, "Impossible d'ouvrir l'explorateur sur ce dossier.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
         // Ligne 2 : Fichier de sortie
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -69,6 +87,25 @@ public class Fenetre extends JPanel {
                 outputFilePathField.setText(selectedFile.getAbsolutePath());
             }
         });
+
+        // Nouveau bouton carré pour ouvrir l'explorateur sur le dossier du fichier de sortie
+        JButton openOutputFolderButton = new JButton("Ouvrir");
+        openOutputFolderButton.setPreferredSize(new Dimension(26, 26));
+        gbc.gridx = 3;
+        add(openOutputFolderButton, gbc);
+        openOutputFolderButton.addActionListener(e -> {
+            String path = outputFilePathField.getText().trim();
+            if (!path.isEmpty()) {
+                File file = new File(path);
+                File directory = file.isDirectory() ? file : file.getParentFile();
+                try {
+                    Desktop.getDesktop().open(directory);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(Fenetre.this, "Impossible d'ouvrir l'explorateur sur ce dossier.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
 
         // Ligne 3 : Choix du mode de conversion
         gbc.gridx = 0;
@@ -139,7 +176,7 @@ public class Fenetre extends JPanel {
         convertButton = new JButton("Convertir");
         gbc.gridx = 0;
         gbc.gridy = 5;
-        gbc.gridwidth = 3;
+        gbc.gridwidth = 4;
         add(convertButton, gbc);
         gbc.gridwidth = 1;
 
@@ -151,7 +188,7 @@ public class Fenetre extends JPanel {
         JScrollPane scrollPane = new JScrollPane(logArea);
         gbc.gridx = 0;
         gbc.gridy = 6;
-        gbc.gridwidth = 3;
+        gbc.gridwidth = 4;
         gbc.fill = GridBagConstraints.BOTH;
         add(scrollPane, gbc);
     }
