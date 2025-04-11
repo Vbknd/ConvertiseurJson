@@ -39,7 +39,8 @@ public class Fenetre extends JPanel {
         gbc.gridx = 2;
         add(browseInputButton, gbc);
         browseInputButton.addActionListener(e -> {
-            JFileChooser fc = new JFileChooser();
+            // remplacer la String par : "\\fichiers test"
+            JFileChooser fc = new JFileChooser(new File("C:\\Users\\oskan\\Documents\\fichiers conversion\\"));
             if (fc.showOpenDialog(Fenetre.this) == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fc.getSelectedFile();
                 inputFilePathField.setText(selectedFile.getAbsolutePath());
@@ -61,7 +62,8 @@ public class Fenetre extends JPanel {
         gbc.gridx = 2;
         add(browseOutputButton, gbc);
         browseOutputButton.addActionListener(e -> {
-            JFileChooser fc = new JFileChooser();
+            // remplacer la String par : "\\fichiers test"
+            JFileChooser fc = new JFileChooser("C:\\Users\\oskan\\Documents\\fichiers conversion\\out\\out.csv");
             if (fc.showSaveDialog(Fenetre.this) == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fc.getSelectedFile();
                 outputFilePathField.setText(selectedFile.getAbsolutePath());
